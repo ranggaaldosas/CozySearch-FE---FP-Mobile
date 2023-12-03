@@ -3,27 +3,28 @@ import React from "react";
 import { AssetImage, HeightSpacer, ReusableBtn, ReusableText } from "../../components";
 import { COLORS, SIZES, TEXT } from "../../constants/theme";
 import ReusableTile from "../../components/Reusable/ReusableTile";
+import LottieView from 'lottie-react-native';
 
 const Successful = ({navigation}) => {
   const hotel = {
     _id: "64c67442776ed29f19727fd7",
     country_id: "64c62bfc65af9f8c969a8d04",
-    title: "Luxury Hotel 1",
+    title: "Kos Gholmasyn Pak Kus",
     imageUrl:
-      "https://d326fntlu7tb1e.cloudfront.net/uploads/4fdc30c2-08c5-4bca-b05c-d8b8a60b020f-luxury1.webp",
+      "https://lh3.googleusercontent.com/-VQWR6KfWKdSzNm3oDzqKYODgVSsL0iuiObukphgjX4-0go_BLSLNR4nTsP9m8a3dV4LOHzFTsW78K0uLN_00SV2K1jYQPuOLvjHNwEqQXxgSC3W9XwIBrNzlTHGHYrEG5Nx6pKBwM2ZKrnwva6EOQCn0KRqgZDHAoRRg7omAwdmMbLRWYtfB7pScgHF1UlNd2aGAgpIpA",
     rating: 4.7,
     review: "1204 Reviews",
-    location: "New York City, NY",
+    location: "Keputih, Sukolilo",
   };
   return (
     <View>
-      <View style={{ marginTop: "40%" }}>
-        <AssetImage
-          data={require("../../assets/images/checked.png")}
-          width={"100%"}
-          height={200}
-          mode={"contain"}
-        />
+      <View style={{ marginTop: "30%" }}>
+      <LottieView
+        source={require("../../assets/images/success_lottie.json")}
+        autoPlay
+        loop
+        style={{ width: "100%", height: 250, alignSelf: "center" }}
+      />
 
         <HeightSpacer height={40} />
 
