@@ -23,40 +23,40 @@ const HotelDetails = ({ navigation }) => {
         "end": "2023-08-17T00:00:00.000Z"
     },
     "coordinates": {
-        "latitude": 37.7749,
-        "longitude": -122.4194
+        "latitude": -7.293969464260375,
+        "longitude": 112.80701637268066
     },
     "_id": "64d34be53295a816648298d0",
     "country_id": "64d2fd32618522e2fb342eec",
-    "title": "Hotel Alpha",
-    "description": "Hotel Alpha is a luxurious hotel located in the heart of a bustling city. Experience the best of hospitality with our impeccable service and top-notch facilities. The elegantly designed rooms offer a comfortable stay, and the hotel's strategic location provides easy access to popular attractions and landmarks. Enjoy a variety of amenities, including free Wi-Fi, parking, air conditioning, room service, flat-screen TV, and private bathrooms. Whether you're here for business or leisure, Hotel Alpha promises a memorable and enjoyable stay.",
+    "title": "Kos Gholmasyn",
+    "description": "Kos Gholmasyn merupakan salah satu kos di kota Surabaya. Dengan fasilitas yang lengkap dan harga yang terjangkau, membuat kos ini menjadi kos yang paling banyak dicari oleh mahasiswa/i yang sedang mencari tempat tinggal di kota Surabaya.",
     "contact": "64c5d95adc7efae2a45ec376",
-    "imageUrl": "https://d326fntlu7tb1e.cloudfront.net/uploads/28266df3-1578-4d0d-8015-c5480f64a73d-hotel-alpha.jpeg",
+    "imageUrl": "https://www.99.co/id/panduan/wp-content/uploads/2022/11/peraturan-kos-kosan-1000x630.jpg",
     "rating": 4.7,
-    "review": "253425 Reviews",
-    "location": "City Center, USA",
-    "price": 200,
+    "review": "425 Reviews",
+    "location": "Keputih, Sukolilo",
+    "price": "1.500.000",
     "__v": 1,
     "reviews": [
         {
             "_id": "64d38ff59af9119acfab0ece",
-            "review": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\nmolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum\nnumquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium\noptio, eaque rerum! Provident similique accusantium nemo autem. Veritatis\nobcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam",
+            "review": "Kos nya cukup menarik, rapih, dan bersih, Hal ini yang membuat saya betah tinggal di kos ini. Terimakasih Kos Gholmasyn",
             "rating": 4.6,
             "user": {
                 "_id": "64c5d95adc7efae2a45ec376",
                 "username": "John Doe",
-                "profile": "https://d326fntlu7tb1e.cloudfront.net/uploads/4c004766-c0ad-42ed-bef1-6a7616b24c11-vinci_11.jpg"
+                "profile": "https://t4.ftcdn.net/jpg/02/83/34/87/360_F_283348729_wcG8rvBF5f1VfPGKy916pIcmgGk0PK7B.jpg"
             },
             "updatedAt": "2023-08-09"
         },
         {
             "_id": "64d797efa5628cedef4fce58",
-            "review": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\nmolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum\nnumquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium\noptio, eaque rerum! Provident similique accusantium nemo autem. Veritatis\nobcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam",
+            "review": "Kos nya cukup menarik, rapih, dan bersih, Hal ini yang membuat saya betah tinggal di kos ini. Terimakasih Kos Gholmasyn",
             "rating": 4.6,
             "user": {
                 "_id": "64c5d95adc7efae2a45ec376",
                 "username": "Zoe Doe",
-                "profile": "https://d326fntlu7tb1e.cloudfront.net/uploads/4c004766-c0ad-42ed-bef1-6a7616b24c11-vinci_11.jpg"
+                "profile": "https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
             },
             "updatedAt": "2023-08-09"
         }
@@ -190,7 +190,7 @@ const HotelDetails = ({ navigation }) => {
         <View style={[reusable.rowWithSpace('space-between'), styles.bottom]}>
           <View>
           <ReusableText
-            text={`\$ ${hotel.price}`}
+            text={`\Rp. ${hotel.price}`}
             family={"medium"}
             size={SIZES.large}
             color={COLORS.black}

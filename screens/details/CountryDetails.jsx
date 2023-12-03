@@ -103,7 +103,7 @@ const CountryDetails = ({ navigation }) => {
 
           <PopularList data={country.popular} />
 
-          <ReusableBtn
+          {/* <ReusableBtn
             onPress={() => navigation.navigate("HotelSearch")}
             btnText={"Find Best Hotels"}
             width={SIZES.width - 40}
@@ -111,7 +111,8 @@ const CountryDetails = ({ navigation }) => {
             borderColor={COLORS.green}
             borderWidth={0}
             textColor={COLORS.white}
-          />
+          /> */}
+          
           <HeightSpacer height={50} />
         </View>
       </View>
