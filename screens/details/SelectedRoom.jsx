@@ -36,29 +36,34 @@ const SelectedRoom = ({ navigation }) => {
     return isFaceIDSupported;
   };
   
-  
   const handleBiometricAuth = async () => {
     try {
       let isBiometricSupported = await LocalAuthentication.hasHardwareAsync();
-      let supportedTypes = await LocalAuthentication.supportedAuthenticationTypesAsync();
-      let isFingerprintSupported = supportedTypes.includes(LocalAuthentication.AuthenticationType.FINGERPRINT);
-    
-      if (isBiometricSupported && isFingerprintSupported) {
+      
+      if (isBiometricSupported) {
         let result = await LocalAuthentication.authenticateAsync({
           promptMessage: "Authenticate with Fingerprint",
-          fallbackLabel: '', // This disables the fallback button to enter a passcode on iOS.
+          cancelLabel: "Cancel", // You can customize this text.
+          fallbackLabel: "Use PIN", // Customize this text to prompt the user to use PIN if fingerprint fails.
         });
       
         if (result.success) {
           // Authentication successful, navigate to the next screen
           navigation.navigate("Success");
         } else {
-          // Handle the case where authentication failed
-          console.error("Authentication failed:", result.error);
-          alert("Authentication failed. Please try again.");
+          // The user has chosen to use the device's PIN or password, or authentication failed
+          if (result.error === "user_fallback") {
+            // Here, you can handle the case when the user has chosen to use the fallback
+            // This is where you would prompt the user for their PIN/password if you want to handle it manually
+            // Otherwise, the system will handle it
+          } else {
+            // Authentication failed
+            console.error("Authentication failed:", result.error);
+            alert("Authentication failed. Please try again.");
+          }
         }
       } else {
-        // Fingerprint hardware not supported or not enrolled, navigate without biometric authentication
+        // Biometric hardware not supported or not enrolled, navigate without biometric authentication
         alert("Fingerprint authentication is not supported on this device, or no fingerprints are enrolled.");
         navigation.navigate("Success");
       }
@@ -68,8 +73,8 @@ const SelectedRoom = ({ navigation }) => {
       alert("An error occurred. Please try again later.");
     }
   };
-  
     
+  
   return (
     <View>
       <View style={{ height: 100 }}>
