@@ -14,11 +14,62 @@ import {
 } from "../../components";
 import { COLORS, SIZES } from "../../constants/theme";
 import reusable from "../../components/Reusable/reusable.style";
+import * as LocalAuthentication from 'expo-local-authentication';
+
 
 const SelectedRoom = ({ navigation }) => {
   const router = useRoute();
   const { item } = router.params;
   console.log(item);
+
+  const checkDeviceForHardware = async () => {
+    let compatible = await LocalAuthentication.hasHardwareAsync();
+    return compatible;
+  };
+
+  const checkBiometricsTypes = async () => {
+    let supportedTypes = await LocalAuthentication.supportedAuthenticationTypesAsync();
+    let isFaceIDSupported = supportedTypes.includes(LocalAuthentication.AuthenticationType.FACIAL_RECOGNITION);
+  
+    console.log("Face ID Supported: ", isFaceIDSupported); // Tambahkan baris ini untuk debugging
+  
+    return isFaceIDSupported;
+  };
+  
+  
+  const handleBiometricAuth = async () => {
+    try {
+      let isBiometricSupported = await LocalAuthentication.hasHardwareAsync();
+      let supportedTypes = await LocalAuthentication.supportedAuthenticationTypesAsync();
+      let isFingerprintSupported = supportedTypes.includes(LocalAuthentication.AuthenticationType.FINGERPRINT);
+    
+      if (isBiometricSupported && isFingerprintSupported) {
+        let result = await LocalAuthentication.authenticateAsync({
+          promptMessage: "Authenticate with Fingerprint",
+          fallbackLabel: '', // This disables the fallback button to enter a passcode on iOS.
+        });
+      
+        if (result.success) {
+          // Authentication successful, navigate to the next screen
+          navigation.navigate("Success");
+        } else {
+          // Handle the case where authentication failed
+          console.error("Authentication failed:", result.error);
+          alert("Authentication failed. Please try again.");
+        }
+      } else {
+        // Fingerprint hardware not supported or not enrolled, navigate without biometric authentication
+        alert("Fingerprint authentication is not supported on this device, or no fingerprints are enrolled.");
+        navigation.navigate("Success");
+      }
+    } catch (error) {
+      // Handle any other errors
+      console.error("An error occurred during fingerprint authentication:", error);
+      alert("An error occurred. Please try again later.");
+    }
+  };
+  
+    
   return (
     <View>
       <View style={{ height: 100 }}>
@@ -146,7 +197,7 @@ const SelectedRoom = ({ navigation }) => {
             <HeightSpacer height={30} />
 
             <ReusableBtn
-              onPress={() => navigation.navigate("Success")}
+              onPress={handleBiometricAuth}
               btnText={"Book Now"}
               width={SIZES.width - 50}
               backgroundColor={COLORS.green}
