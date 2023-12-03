@@ -10,19 +10,19 @@ const Onboarding = () => {
             id: 1,
             lottie: require('../../assets/images/travel_lottie.json'),
             title: "Kemudahan pencarian Kos Terbaik?",
-            backgroundImage: require('../../assets/images/1.png') // Ganti dengan gambar latar belakang yang sesuai
+            backgroundImage: require('../../assets/images/1.png')
         },
         {
             id: 2,
             lottie: require('../../assets/images/payment_lottie.json'),
-            title: "Pembayaran Aman?",
-            backgroundImage: require('../../assets/images/2.png') // Ganti dengan gambar latar belakang yang sesuai
+            title: "Keamanan pembayaran Kos Terbaik?",
+            backgroundImage: require('../../assets/images/2.png')
         },
         {
             id: 3,
-            lottie: require('../../assets/images/app_lottie.json'), // Ganti dengan animasi Lottie yang sesuai
+            lottie: require('../../assets/images/app_lottie.json'),
             title: "CozySearch Jawabannya!",
-            backgroundImage: require('../../assets/images/3.png') // Ganti dengan gambar latar belakang yang sesuai
+            backgroundImage: require('../../assets/images/3.png') 
         },
         
     ];
@@ -34,7 +34,12 @@ const Onboarding = () => {
             showsHorizontalScrollIndicator={false}
             data={slides}
             keyExtractor={(item) => item.id.toString()}
-            renderItem={({item})=> <Slides item={item}/>}
+            renderItem={({ item }) => (
+                <Slides 
+                    item={item} 
+                    isLastSlide={item.id === slides.length}
+                />
+            )}
         />
     );
 }
