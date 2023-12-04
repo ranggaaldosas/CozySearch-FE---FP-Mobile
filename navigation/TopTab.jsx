@@ -1,8 +1,10 @@
-import { View, Image } from "react-native";
-import React from "react";
+import { View, Image, TouchableOpacity, Alert, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { TopBookings, TopInfo, TopTrips } from "../screens";
 import { COLORS, SIZES } from "../constants/theme";
+import * as ImagePicker from 'expo-image-picker';
+import Modal from 'react-native-modal';
 import {
   AppBar,
   HeightSpacer,
@@ -12,64 +14,134 @@ import {
 import styles from "./topTab.style";
 const Tab = createMaterialTopTabNavigator();
 
-// https://d326fntlu7tb1e.cloudfront.net/uploads/c87b6dfb-ee4b-47fa-9c02-6ccca2893a6f-vinci_06.jpg
-
 const TopTab = () => {
+  const [image, setImage] = useState(null);
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await ImagePicker.requestCameraPermissionsAsync();
+      if (status !== 'granted') {
+        Alert.alert('Sorry, we need camera permissions to make this work!');
+      }
+    })();
+  }, []);
+
+  const pickImage = async () => {
+    setModalVisible(false);
+
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
+
+  const takePhoto = async () => {
+    setModalVisible(false);
+
+    let result = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <View style={{ backgroundColor: COLORS.lightWhite }}>
         <View>
-          <NetworkImage
-            source={
-              "https://d326fntlu7tb1e.cloudfront.net/uploads/005cd529-6605-4bb9-8d8f-9475bf308f67-vinci0000.jpg"
-            }
-            width={"100%"}
-            height={300}
-            radius={0}
-          />
-
-          <AppBar
-            top={40}
-            left={20}
-            right={20}
-            color={COLORS.white}
-            icon={"logout"}
-            color1={COLORS.white}
-            onPress1={() => {}}
-          />
-
-          <View style={styles.profile}>
-            <Image
-              source={{
-                uri: "https://d326fntlu7tb1e.cloudfront.net/uploads/c87b6dfb-ee4b-47fa-9c02-6ccca2893a6f-vinci_06.jpg",
-              }}
-              style={styles.image}
-            />
-
-            <HeightSpacer height={5} />
-
-            <View style={{ alignItems: "center" }}>
-              <ReusableText
-                text={"King Andre"}
-                family={"medium"}
-                size={SIZES.medium}
-                color={COLORS.black}
+          <TouchableOpacity onPress={() => setModalVisible(true)}>
+            <View>
+              <NetworkImage
+                source={image ? { uri: image } : "https://d326fntlu7tb1e.cloudfront.net/uploads/005cd529-6605-4bb9-8d8f-9475bf308f67-vinci0000.jpg"}
+                width={"100%"}
+                height={300}
+                radius={0}
               />
             </View>
 
-            <HeightSpacer height={5} />
+            <AppBar
+              top={40}
+              left={20}
+              right={20}
+              color={COLORS.white}
+              icon={"logout"}
+              color1={COLORS.white}
+              onPress1={() => {}}
+            />
 
-            <View style={styles.name}>
+            <View style={styles.profile}>
+              <HeightSpacer height={5} />
               <View style={{ alignItems: "center" }}>
+                {image ? (
+                  <Image source={{ uri: image }} style={styles.image} />
+                ) : (
+                  <Image
+                    source={{
+                      uri: "https://d326fntlu7tb1e.cloudfront.net/uploads/c87b6dfb-ee4b-47fa-9c02-6ccca2893a6f-vinci_06.jpg",
+                    }}
+                    style={styles.image}
+                  />
+                )}
+                <HeightSpacer height={5} />
                 <ReusableText
-                  text={"gfadghasdfh@gmail.com"}
+                  text={"King Andre"}
+                  family={"medium"}
+                  size={SIZES.medium}
+                  color={COLORS.black}
+                />
+              </View>
+              <HeightSpacer height={5} />
+              <View style={styles.name}>
+                <View style={{ alignItems: "center" }}>
+                  <ReusableText
+                    text={"gfadghasdfh@gmail.com"}
+                    family={"medium"}
+                    size={SIZES.medium}
+                    color={COLORS.white}
+                  />
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+          <Modal isVisible={isModalVisible} style={modalStyles.modalContainer}>
+            <View style={modalStyles.innerContainer}>
+              <TouchableOpacity onPress={pickImage} style={modalStyles.button}>
+                <ReusableText
+                  text={"Pick from Gallery"}
                   family={"medium"}
                   size={SIZES.medium}
                   color={COLORS.white}
                 />
-              </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={takePhoto} style={modalStyles.button}>
+                <ReusableText
+                  text={"Take Photo"}
+                  family={"medium"}
+                  size={SIZES.medium}
+                  color={COLORS.white}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => setModalVisible(false)} style={modalStyles.cancelButton}>
+                <ReusableText
+                  text={"Cancel"}
+                  family={"medium"}
+                  size={SIZES.medium}
+                  color={COLORS.white}
+                />
+              </TouchableOpacity>
             </View>
-          </View>
+          </Modal>
         </View>
       </View>
       <Tab.Navigator>
@@ -80,5 +152,35 @@ const TopTab = () => {
     </View>
   );
 };
+
+const modalStyles = StyleSheet.create({
+  modalContainer: {
+    justifyContent: 'flex-end',
+    margin: 0,
+  },
+  innerContainer: {
+    backgroundColor: COLORS.primary,
+    padding: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  button: {
+    marginBottom: 15,
+    padding: 10,
+    borderRadius: 10,
+    backgroundColor: COLORS.secondary,
+    width: '100%',
+    alignItems: 'center',
+  },
+  cancelButton: {
+    padding: 10,
+    borderRadius: 10,
+    backgroundColor: COLORS.red,
+    width: '100%',
+    alignItems: 'center',
+  },
+});
 
 export default TopTab;
