@@ -63,7 +63,7 @@ const TopTab = () => {
           <TouchableOpacity onPress={() => setModalVisible(true)}>
             <View>
               <NetworkImage
-                source={image ? { uri: image } : "https://d326fntlu7tb1e.cloudfront.net/uploads/005cd529-6605-4bb9-8d8f-9475bf308f67-vinci0000.jpg"}
+                source={image ? { uri: image } : "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Fwhite-background&psig=AOvVaw2ABcv5dyCteNAiAgpr-0p0&ust=1701750651507000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCKCbt6r59IIDFQAAAAAdAAAAABAE"}
                 width={"100%"}
                 height={300}
                 radius={0}
@@ -88,14 +88,14 @@ const TopTab = () => {
                 ) : (
                   <Image
                     source={{
-                      uri: "https://d326fntlu7tb1e.cloudfront.net/uploads/c87b6dfb-ee4b-47fa-9c02-6ccca2893a6f-vinci_06.jpg",
+                      uri: "https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png",
                     }}
                     style={styles.image}
                   />
                 )}
                 <HeightSpacer height={5} />
                 <ReusableText
-                  text={"King Andre"}
+                  text={"King Rando"}
                   family={"medium"}
                   size={SIZES.medium}
                   color={COLORS.black}
@@ -105,7 +105,7 @@ const TopTab = () => {
               <View style={styles.name}>
                 <View style={{ alignItems: "center" }}>
                   <ReusableText
-                    text={"gfadghasdfh@gmail.com"}
+                    text={"kingrando@gmail.com"}
                     family={"medium"}
                     size={SIZES.medium}
                     color={COLORS.white}
@@ -121,7 +121,7 @@ const TopTab = () => {
                   text={"Pick from Gallery"}
                   family={"medium"}
                   size={SIZES.medium}
-                  color={COLORS.white}
+                  color={COLORS.lightBlue}
                 />
               </TouchableOpacity>
               <TouchableOpacity onPress={takePhoto} style={modalStyles.button}>
@@ -129,7 +129,7 @@ const TopTab = () => {
                   text={"Take Photo"}
                   family={"medium"}
                   size={SIZES.medium}
-                  color={COLORS.white}
+                  color={COLORS.lightBlue}
                 />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setModalVisible(false)} style={modalStyles.cancelButton}>
@@ -170,7 +170,7 @@ const modalStyles = StyleSheet.create({
     marginBottom: 15,
     padding: 10,
     borderRadius: 10,
-    backgroundColor: COLORS.secondary,
+    backgroundColor: COLORS.white,
     width: '100%',
     alignItems: 'center',
   },
