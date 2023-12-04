@@ -30,7 +30,7 @@ const Recommendations = () => {
         "review": "1452 Reviews"
     },
     {
-        "_id": "64d09e3f364e1c37c8b4b13c",
+        "_id": "64d09e3f364e1c37c8b4b13f",
         "country_id": "64c62bfc65af9f8c969a8d04",
         "title": "Kos Merpati (Putri)",
         "location": "Bandung, Indonesia",
@@ -39,7 +39,7 @@ const Recommendations = () => {
         "review": "2145 Reviews"
     },
     {
-      "_id": "64d09e3f364e1c37c8b4b13c",
+      "_id": "64d09e3f364e1c37c8b4b13e",
       "country_id": "64c62bfc65af9f8c969a8d04",
       "title": "Kos Pak Dzaki (Putra)",
       "location": "Depok, Yogyakarta",
