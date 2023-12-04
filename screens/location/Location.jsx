@@ -15,26 +15,33 @@ const LocationComponent = () => {
 
   useEffect(() => {
     (async () => {
-      const { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
-        return;
-      }
-
-      let location = await Location.getCurrentPositionAsync({});
-      setCurrentLocation({
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-        latitudeDelta: 0.01,
-        longitudeDelta: 0.01
-      });
-
-      let addressResponse = await Location.reverseGeocodeAsync(location.coords);
-      if (addressResponse && addressResponse.length > 0) {
-        setAddress(`${addressResponse[0].name}, ${addressResponse[0].street}, ${addressResponse[0].city}`);
+      try {
+        const { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') {
+          setErrorMsg('Permission to access location was denied');
+          return;
+        }
+  
+        let location = await Location.getCurrentPositionAsync({});
+        setCurrentLocation({
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01
+        });
+  
+        let addressResponse = await Location.reverseGeocodeAsync(location.coords);
+        if (addressResponse && addressResponse.length > 0) {
+          setAddress(`${addressResponse[0].name}, ${addressResponse[0].street}, ${addressResponse[0].city}`);
+        }
+      } catch (error) {
+        // Handle any errors that occur during the fetch operation
+        setErrorMsg('Failed to fetch location');
+        console.error(error); // Log the error to the console for debugging
       }
     })();
   }, []);
+  
 
   if (!currentLocation) {
     return (
