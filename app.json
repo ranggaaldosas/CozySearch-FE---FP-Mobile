@@ -17,6 +17,8 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
+        "NSCameraUsageDescription": "This app requires camera access to take photos.",
+        "NSPhotoLibraryUsageDescription": "This app requires photo library access to select photos.",
         "NSFaceIDUsageDescription": "This app requires Face ID to authenticate."
       }
     },
