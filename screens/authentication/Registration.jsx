@@ -10,6 +10,7 @@ import {
   HeightSpacer,
   ReusableBtn,
 } from "../../components";
+import axios from "axios";
 
 const validationSchema = Yup.object().shape({
   password: Yup.string()
@@ -26,6 +27,16 @@ const Registration = () => {
   const [loader, setLoader] = useState(false);
   const [responseData, setResponseData] = useState(null);
   const [obsecureText, setObsecureText] = useState(false);
+
+
+  const handleSubmit = async () => {
+    try {
+      await axios.post('http://localhost:7000/')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <View style={styles.container}>
       <Formik

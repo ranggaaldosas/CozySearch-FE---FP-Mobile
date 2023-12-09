@@ -28,6 +28,62 @@ export default function App() {
     return null;
   }
 
+  const components = [
+    {
+      name: "Onboard",
+      component: Onboarding,
+    },
+    {
+      name: "Bottom",
+      component: BottomTabNavigation,
+    },
+    {
+      name: "Search",
+      component: Search,
+    },
+    {
+      name: "CountryDetails",
+      component: CountryDetails,
+    },
+    {
+      name: "Recommended",
+      component: Recommended,
+    },
+    {
+      name: "PlaceDetails",
+      component: PlaceDetails,
+    },
+    {
+      name: "HotelDetails",
+      component: HotelDetails,
+    },
+    {
+      name: "HotelList",
+      component: HotelList,
+    },
+    {
+      name: "SelectRoom",
+      component: SelectRoom,
+    },
+    {
+      name: "Payments",
+      component: Payments,
+    },
+    {
+      name: "Success",
+      component: Successful,
+    },
+    {
+      name: "Fail",
+      component: Failed,
+    },
+    {
+      name: "PlaceDetails",
+      component: PlaceDetails,
+    },
+    
+  ];
+
   return (
    <NavigationContainer>
       <Stack.Navigator>
