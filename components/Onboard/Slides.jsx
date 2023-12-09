@@ -36,7 +36,7 @@ const Slides = ({ item, isLastSlide }) => {
           text={item.title}
           family={"medium"}
           size={SIZES.xxLarge}
-          color={COLORS.black}
+          color={item.id === 2 ? COLORS.lightOrange : COLORS.black}
         />
 
         <HeightSpacer height={40} />
