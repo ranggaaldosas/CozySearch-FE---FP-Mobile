@@ -12,11 +12,33 @@ import {
   ReusableText,
 } from "../components";
 import styles from "./topTab.style";
+import { useNavigation } from '@react-navigation/native'
+import axios from "axios";
+import { useAuthStore } from "../store/authStore";
 const Tab = createMaterialTopTabNavigator();
 
 const TopTab = () => {
   const [image, setImage] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
+  const [userData, setUserData] = useState('')
+  const navigation = useNavigation();
+  const { userId } = useAuthStore();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const res = await axios.get(`http://cozysearch-befp-mobile-production.up.railway.app/api/users/${userId}`);
+        if (res && res.data) {
+          setUserData(res.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+    fetchUserData();
+  }, [userId]);
+  
 
   useEffect(() => {
     (async () => {
@@ -77,7 +99,9 @@ const TopTab = () => {
               color={COLORS.white}
               icon={"logout"}
               color1={COLORS.white}
-              onPress1={() => {}}
+              onPress1={() => {
+                navigation.navigate('Auth');
+              }}
             />
 
             <View style={styles.profile}>
@@ -95,7 +119,7 @@ const TopTab = () => {
                 )}
                 <HeightSpacer height={5} />
                 <ReusableText
-                  text={"King Rando"}
+                  text={userData.username}
                   family={"medium"}
                   size={SIZES.medium}
                   color={COLORS.black}
@@ -105,7 +129,7 @@ const TopTab = () => {
               <View style={styles.name}>
                 <View style={{ alignItems: "center" }}>
                   <ReusableText
-                    text={"kingrando@gmail.com"}
+                    text={userData.email}
                     family={"medium"}
                     size={SIZES.medium}
                     color={COLORS.white}

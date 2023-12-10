@@ -9,6 +9,7 @@ import { WidthSpacer, HeightSpacer, ReusableBtn, ReusableText } from "../../comp
 import { useNavigation } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
 import axios from "axios";
+import { useAuthStore } from "../../store/authStore";
 
 const validationSchema = Yup.object().shape({
   password: Yup.string()
@@ -22,6 +23,7 @@ const Signin = () => {
   const [responseData, setResponseData] = useState(null);
   const [obsecureText, setObsecureText] = useState(false);
   const [formRes, setFormRes] = useState({})
+  const { setUserId } = useAuthStore()
   const navigation = useNavigation();
  
   return (
@@ -37,6 +39,7 @@ const Signin = () => {
             );
             if(res.data.status){
              navigation.navigate('Bottom');
+             setUserId(res.data.id)
             } else {
               setFormRes(res.data);
             }
