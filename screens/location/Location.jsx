@@ -82,10 +82,14 @@ const LocationComponent = () => {
 
     try {
       // console.log(location)
-      const res = await axios.post("http://10.0.2.2:5003/api/dorms/nearest", {
-        lat: location.coords.latitude,
-        long: location.coords.longitude,
-      });
+      const res = await axios.post(
+        "https://cozysearch-befp-mobile-production.up.railway.app/api/dorms/nearest",
+        {
+          lat: location.coords.latitude,
+          long: location.coords.longitude,
+        }
+      );
+      console.log("Data : ", res.data)
       setNearbyKost(res.data)
     } catch (error) {
       console.log("Error : ", error.message);
@@ -130,6 +134,8 @@ const LocationComponent = () => {
     })();
   }, []);
 
+  console.log(nearbyKost)
+
   const calculateDistance = (lat1, lon1, lat2, lon2) => {
     const toRadian = (angle) => (Math.PI / 180) * angle;
     const distance = (a, b) => (Math.PI / 180) * (a - b);
@@ -162,14 +168,17 @@ const LocationComponent = () => {
       <MapView initialRegion={currentLocation} style={styles.mapStyle}>
         {nearbyKost.map((kos) => (
           <Marker
-            key={kos.id}
-            coordinate={{ latitude: kos.latitude, longitude: kos.longitude }}
+            key={kos._id}
+            coordinate={{
+              latitude: kos.location.coordinates[1],
+              longitude: kos.location.coordinates[0],
+            }}
             title={kos.name}
             description={`Distance: ${calculateDistance(
               currentLocation.latitude,
               currentLocation.longitude,
-              kos.latitude,
-              kos.longitude
+              kos.location.coordinates[1],
+              kos.location.coordinates[0]
             ).toFixed(2)} km`}
           />
         ))}
