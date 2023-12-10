@@ -43,7 +43,7 @@ const Slides = ({ item, isLastSlide }) => {
 
         {isLastSlide ? (
           <ReusableBtn
-            onPress={() => navigation.navigate('Bottom')}
+            onPress={() => navigation.navigate('Auth')}
             btnText={"Let's go"}
             width={(SIZES.width - 50) / 2.2}
             backgroundColor={COLORS.red}

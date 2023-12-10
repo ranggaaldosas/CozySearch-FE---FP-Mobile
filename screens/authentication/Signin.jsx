@@ -6,6 +6,8 @@ import * as Yup from "yup";
 import { COLORS, SIZES, TEXT } from "../../constants/theme";
 import {MaterialCommunityIcons} from '@expo/vector-icons'
 import { WidthSpacer, HeightSpacer, ReusableBtn, ReusableText } from "../../components";
+import { useNavigation } from '@react-navigation/native';
+import LottieView from 'lottie-react-native';
 
 const validationSchema = Yup.object().shape({
   password: Yup.string()
@@ -18,14 +20,26 @@ const Signin = () => {
   const [loader, setLoader] = useState(false);
   const [responseData, setResponseData] = useState(null);
   const [obsecureText, setObsecureText] = useState(false);
+  const navigation = useNavigation();
+ 
   return (
     <View style={styles.container}>
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={validationSchema}
-        onSubmit={(value) => {
-            console.log(value);
-            
+        onSubmit={(values) => {
+          // Static credentials
+          const email = "mobile@gmail.com";
+          const password = "mobile123";
+      
+          // Simulate sign-in process
+          if (values.email === email && values.password === password) {
+              // If credentials match, navigate to 'Bottom'
+              navigation.navigate('Bottom');
+          } else {
+              // Handle wrong credentials
+              alert("Incorrect email or password");
+          }
         }}
       >
         {({
@@ -120,17 +134,12 @@ const Signin = () => {
 
             <HeightSpacer height={20} />
 
-            <ReusableBtn
-          onPress={handleSubmit}
-          btnText={"SIGN IN"}
-          width={SIZES.width - 40}
-          backgroundColor={COLORS.green}
-          borderColor={COLORS.green}
-          borderWidth={0}
-          textColor={COLORS.white}
-        />
-
-            
+            <TouchableOpacity
+              onPress={handleSubmit} // Replace 'handleSubmit' with your actual function
+              style={styles.customButton}
+            >
+              <Text style={styles.buttonText}>SIGN IN</Text>
+            </TouchableOpacity>
           </View>
         )}
       </Formik>
@@ -139,3 +148,5 @@ const Signin = () => {
 };
 
 export default Signin;
+
+

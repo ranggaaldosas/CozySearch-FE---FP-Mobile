@@ -6,6 +6,7 @@ import { NavigationContainer} from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Onboarding, Search ,CountryDetails, Recommended, PlaceDetails, HotelDetails, HotelList, HotelSearch, SelectRoom, Payments, Settings, SelectedRoom, Successful, Failed} from './screens';
 import BottomTabNavigation from './navigation/BottomTabNavigation';
+import AuthTopTab from './navigation/AuthTopTab';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,10 @@ export default function App() {
     {
       name: "Bottom",
       component: BottomTabNavigation,
+    },
+    {
+      name: "Auth",
+      component: AuthTopTab,
     },
     {
       name: "Search",
@@ -89,6 +94,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name='Onboard' component={Onboarding} options={ {headerShown: false}}/>
         <Stack.Screen name='Bottom' component={BottomTabNavigation} options={ {headerShown: false}}/>
+        <Stack.Screen name='Auth' component={AuthTopTab} options={ {headerShown: false}}/>
         <Stack.Screen name='Search' component={Search} options={ {headerShown: false}}/>
         <Stack.Screen name='CountryDetails' component={CountryDetails} options={ {headerShown: false}}/>
         <Stack.Screen name='Recommended' component={Recommended} options={ {headerShown: false}}/>

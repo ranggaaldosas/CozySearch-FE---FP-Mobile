@@ -9,9 +9,10 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.lightWhite
     },
     inputWrapper: (borderColor)=> ({
-        borderColor: borderColor,
+        borderColor: COLORS.black,
         backgroundColor: COLORS.lightWhite,
-        borderWidth: 1,
+        borderWidth: 3,
+        borderBottomWidth: 6,
         height: 50,
         borderRadius: 12,
         flexDirection: "row",
@@ -34,7 +35,23 @@ const styles = StyleSheet.create({
        fontFamily: 'regular',
        marginTop: 5,
        marginLeft: 5,
-    }
+    },
+    customButton: {
+        width: SIZES.width - 40,
+        backgroundColor: COLORS.green,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 45,
+        borderRadius: SIZES.small,
+        borderColor: COLORS.black,
+        borderWidth: 3,
+        borderBottomWidth: 7, // Bottom border width of 5
+      },
+    buttonText: {
+        fontFamily: "medium", // Adjust the font family as per your theme
+        fontSize: SIZES.medium,
+        color: COLORS.white,
+      },
 
 })
 
