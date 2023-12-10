@@ -27,7 +27,7 @@ const Registration = () => {
   const [loader, setLoader] = useState(false);
   const [responseData, setResponseData] = useState(null);
   const [obsecureText, setObsecureText] = useState(false);
-
+  const [formRes, setFormRes] = useState({})
 
   const handleSubmit = async () => {
     try {
@@ -42,8 +42,20 @@ const Registration = () => {
       <Formik
         initialValues={{ email: "", password: "", username: "" }}
         validationSchema={validationSchema}
-        onSubmit={(value) => {
-          console.log(value);
+        onSubmit={async (value) => {
+          try {
+            const res = await axios.post(
+              'http://cozysearch-befp-mobile-production.up.railway.app/api/auth/register',
+              value
+            );
+            if(res.data.status){
+              setFormRes(res.data)
+            } else {
+              setFormRes(res.data)
+            }
+          } catch (error) {
+            setFormRes({ status: false, message: 'Register failed, error :' + error });
+          }
         }}
       >
         {({
@@ -190,6 +202,14 @@ const Registration = () => {
               borderWidth={0}
               textColor={COLORS.white}
             />
+            {formRes.status == false && (
+              <Text style={styles.errorMessage}>{formRes.message}</Text>
+              ) 
+            }
+            {formRes.status == true && (
+              <Text style={styles.successMessage}>{formRes.message}</Text>
+              ) 
+            }
           </View>
         )}
       </Formik>

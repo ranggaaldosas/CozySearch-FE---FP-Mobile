@@ -8,10 +8,11 @@ import {MaterialCommunityIcons} from '@expo/vector-icons'
 import { WidthSpacer, HeightSpacer, ReusableBtn, ReusableText } from "../../components";
 import { useNavigation } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
+import axios from "axios";
 
 const validationSchema = Yup.object().shape({
   password: Yup.string()
-    .min(8, "Password must be at least 8 characters")
+    // .min(8, "Password must be at least 8 characters")
     .required("Required"),
   email: Yup.string().email("Provide a valid email").required("Required"),
 });
@@ -20,6 +21,7 @@ const Signin = () => {
   const [loader, setLoader] = useState(false);
   const [responseData, setResponseData] = useState(null);
   const [obsecureText, setObsecureText] = useState(false);
+  const [formRes, setFormRes] = useState({})
   const navigation = useNavigation();
  
   return (
@@ -27,18 +29,19 @@ const Signin = () => {
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          // Static credentials
-          const email = "mobile@gmail.com";
-          const password = "mobile123";
-      
-          // Simulate sign-in process
-          if (values.email === email && values.password === password) {
-              // If credentials match, navigate to 'Bottom'
-              navigation.navigate('Bottom');
-          } else {
-              // Handle wrong credentials
-              alert("Incorrect email or password");
+        onSubmit={async (value) => {
+          try {
+            const res = await axios.post(
+              'http://cozysearch-befp-mobile-production.up.railway.app/api/auth/login',
+              value
+            );
+            if(res.data.status){
+             navigation.navigate('Bottom');
+            } else {
+              setFormRes(res.data);
+            }
+          } catch (error) {
+            setFormRes({ status: false, message: 'Sign-in failed, error :' + error });
           }
         }}
       >
@@ -140,6 +143,9 @@ const Signin = () => {
             >
               <Text style={styles.buttonText}>SIGN IN</Text>
             </TouchableOpacity>
+            {formRes.status == false && (
+              <Text style={styles.errorMessage}>{formRes.message}</Text>
+            ) }
           </View>
         )}
       </Formik>

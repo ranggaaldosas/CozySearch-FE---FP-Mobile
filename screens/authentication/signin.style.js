@@ -36,6 +36,13 @@ const styles = StyleSheet.create({
        marginTop: 5,
        marginLeft: 5,
     },
+    successMessage: {
+        color: COLORS.green,
+        fontSize: SIZES.small,
+        fontFamily: 'regular',
+        marginTop: 5,
+        marginLeft: 5,
+     }, 
     customButton: {
         width: SIZES.width - 40,
         backgroundColor: COLORS.green,
