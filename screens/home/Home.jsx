@@ -15,7 +15,7 @@ const Home = ({ navigation }) => {
       <View>
         <View style={reusable.rowWithSpace("space-between")}>
           <ReusableText
-            text={"Hey Wisnu!"}
+            text={"Welcome back!"}
             family={"regular"}
             size={TEXT.large}
             color={COLORS.black}
