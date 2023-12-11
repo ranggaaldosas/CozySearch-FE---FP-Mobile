@@ -34,7 +34,7 @@ const Signin = () => {
         onSubmit={async (value) => {
           try {
             const res = await axios.post(
-              'http://cozysearch-befp-mobile-production.up.railway.app/api/auth/login',
+              'https://cozysearch-befp-mobile-production.up.railway.app/api/auth/login',
               value
             );
             if(res.data.status){

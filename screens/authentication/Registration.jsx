@@ -45,7 +45,7 @@ const Registration = () => {
         onSubmit={async (value) => {
           try {
             const res = await axios.post(
-              'http://cozysearch-befp-mobile-production.up.railway.app/api/auth/register',
+              'https://cozysearch-befp-mobile-production.up.railway.app/api/auth/register',
               value
             );
             if(res.data.status){

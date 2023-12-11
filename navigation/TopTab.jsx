@@ -27,7 +27,7 @@ const TopTab = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const res = await axios.get(`http://cozysearch-befp-mobile-production.up.railway.app/api/users/${userId}`);
+        const res = await axios.get(`https://cozysearch-befp-mobile-production.up.railway.app/api/users/${userId}`);
         if (res && res.data) {
           setUserData(res.data);
         }
