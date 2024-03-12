@@ -51,7 +51,7 @@ const Recommended = ({ navigation }) => {
       _id: "64d30f789d008909fa8b7ce5",
       country_id: "64d2fd32618522e2fb342eec",
       imageUrl:
-        "https://blog-images.reddoorz.com/uploads/image/file/10590/kost-bali-terdekat-dari-kampus-feature.jpg",
+        "https://google.me",
       title: "Kos Melati",
       location: "Keputih, Sukolilo",
       rating: 4.8,
